@@ -1,0 +1,35 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.3'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.bigtable'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+        flatDir {
+            dirs 'lib'
+        }
+}
+
+dependencies {
+        // central maven
+	implementation (
+            'org.springframework.boot:spring-boot-starter-web',
+            'com.google.cloud.bigtable:bigtable-hbase:1.5.0'
+        )
+        
+        // local lib
+        implementation(
+            'com.vng.zing:hapax:2.3.5-r91mod'
+        )
+    
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}
