@@ -16,7 +16,7 @@ import org.ini4j.Wini;
  *
  * @author chungnt
  */
-public class BigTableConfiguration {
+public class BTConfig {
 
     public static final String MONITOR_PROJECT_ID;
     public static final String MONITOR_INSTANCE_ID;
@@ -26,7 +26,12 @@ public class BigTableConfiguration {
     public static final String CF_CPU = "cpu";
     public static final String CF_NETWORK = "network";
 
-    private static final Logger _logger = LogManager.getLogger(BigTableConfiguration.class);
+    public static final String CF_QUALIFIER_RAM_HEAP_USAGE = "heap-usage";
+    public static final String CF_QUALIFIER_RAM_NONHEAP_USAGE = "nonheap-usage";
+    public static final String CF_QUALIFIER_CPU_USAGE = "usage";
+    public static final String CF_QUALIFIER_NETWORK_TRAFFIC = "traffic";
+
+    private static final Logger _logger = LogManager.getLogger(BTConfig.class);
 
     static {
         String projectId = "";

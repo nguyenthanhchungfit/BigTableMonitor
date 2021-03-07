@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author chungnt
  */
 @RestController
-public class HelloController {
+public class IndexController {
 
     @RequestMapping("/")
     public String index() {
@@ -30,7 +30,7 @@ public class HelloController {
             Template tmpl = HapaxTemplate.TEMPLATE_LOADER.getTemplate("hello");
             content = tmpl.renderToString(dict);
         } catch (TemplateException ex) {
-            Logger.getLogger(HelloController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(IndexController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return content;
     }

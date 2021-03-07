@@ -52,7 +52,7 @@ public class BigtableDataClientWrapper {
         return cells;
     }
 
-    public void writeDataToTable(String tableId, RowMutation rowMutation) {
+    public void writeDataToTable(RowMutation rowMutation) {
         this._dataClient.mutateRow(rowMutation);
     }
 
