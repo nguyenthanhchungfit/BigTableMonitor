@@ -1,5 +1,6 @@
 package com.bigtable.webbackend;
 
+import com.bigtable.webbackend.bigtable.BigTableModel;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,7 +19,7 @@ public class MainApp {
 		return args -> {
 
 			System.out.println("Let's inspect the beans provided by Spring Boot:");
-
+//            BigTableModel.authExplicit("/home/lap13644/googlesdk/authen/bigtable/GoogleBigtableExam-00d9f526b27d.json");
 //			String[] beanNames = ctx.getBeanDefinitionNames();
 //			Arrays.sort(beanNames);
 //			for (String beanName : beanNames) {
