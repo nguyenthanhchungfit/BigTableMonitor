@@ -5,6 +5,7 @@
  */
 package com.bigtable.webbackend.bigtable;
 
+import com.google.api.gax.rpc.ServerStream;
 import com.google.cloud.bigtable.data.v2.BigtableDataClient;
 import com.google.cloud.bigtable.data.v2.BigtableDataSettings;
 import com.google.cloud.bigtable.data.v2.models.Query;
@@ -12,6 +13,8 @@ import com.google.cloud.bigtable.data.v2.models.Row;
 import com.google.cloud.bigtable.data.v2.models.RowCell;
 import com.google.cloud.bigtable.data.v2.models.RowMutation;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import org.apache.logging.log4j.LogManager;
@@ -52,9 +55,19 @@ public class BigtableDataClientWrapper {
         return cells;
     }
 
-    public void writeDataToTable(RowMutation rowMutation) {
-        this._dataClient.mutateRow(rowMutation);
+    public List<Row> readRange(Query query) {
+        ServerStream<Row> rowStreams = this._dataClient.readRows(query);
+        List<Row> listRows = new ArrayList<>();
+        Iterator<Row> rowIterator = rowStreams.iterator();
+        while (rowIterator.hasNext()) {
+            Row row = rowIterator.next();
+            listRows.add(row);
+        }
+        return listRows;
     }
 
     // write
+    public void writeDataToTable(RowMutation rowMutation) {
+        this._dataClient.mutateRow(rowMutation);
+    }
 }

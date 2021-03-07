@@ -9,9 +9,12 @@ import com.bigtable.webbackend.bigtable.BigTableModel;
 import com.bigtable.webbackend.entities.CPUInfo;
 import com.bigtable.webbackend.entities.NetworkInfo;
 import com.bigtable.webbackend.entities.RamInfo;
+import com.bigtable.webbackend.utils.JsonUtils;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryUsage;
 import java.util.Random;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -19,13 +22,19 @@ import java.util.Random;
  */
 public class CollectorsModel {
 
+    private static final Logger _logger = LogManager.getLogger(CollectorsModel.class);
     private static final Random rd = new Random(10);
 
-    public static void collectInfo(String appName) {
+    public static void collectAndSubmitData(String appName) {
         RamInfo ramInfo = collectRamInfo();
         CPUInfo cpuInfo = collectCPUInfo();
         NetworkInfo networkInfo = collectNetworkInfo();
 
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("ram: ").append(JsonUtils.toJsonStr(ramInfo)).append("\n");
+//        sb.append("cpu: ").append(JsonUtils.toJsonStr(cpuInfo)).append("\n");
+//        sb.append("network: ").append(JsonUtils.toJsonStr(JsonUtils.toJsonStr(networkInfo)));
+//        _logger.info(">>>> collect: " + sb.toString());
         // submit data
         BigTableModel.INSTANCE.submitData(appName, cpuInfo, networkInfo, ramInfo);
     }
@@ -51,7 +60,7 @@ public class CollectorsModel {
 
     public static NetworkInfo collectNetworkInfo() {
         long network = rd.nextInt(100);
-        long networkUsage = (long) (network * 1.0 * 10000 / 100);
+        long networkUsage = (long) (network * 1.0 * 100000 / 100);
         NetworkInfo networkInfo = new NetworkInfo(networkUsage);
         return networkInfo;
     }

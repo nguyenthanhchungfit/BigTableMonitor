@@ -22,6 +22,10 @@ public class MonitorDataResult {
     public MonitorDataResult() {
     }
 
+    public MonitorDataResult(int error) {
+        this.error = error;
+    }
+
     public MonitorDataResult(int error, MonitorCpuInfo cpuInfo, MonitorNetworkInfo networkInfo, MonitorRamData ramInfo, List<Long> timestamps) {
         this.error = error;
         this.cpuInfo = cpuInfo;

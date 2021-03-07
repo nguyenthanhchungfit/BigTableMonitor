@@ -10,15 +10,16 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class MainApp {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MainApp.class, args);
-	}
-    
-    @Bean
-	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
-		return args -> {
+    public static void main(String[] args) {
+        BigTableModel.INSTANCE.initTable();
+        SpringApplication.run(MainApp.class, args);
+    }
 
-			System.out.println("Let's inspect the beans provided by Spring Boot:");
+    @Bean
+    public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+        return args -> {
+
+            System.out.println("Let's inspect the beans provided by Spring Boot:");
 //            BigTableModel.authExplicit("/home/lap13644/googlesdk/authen/bigtable/GoogleBigtableExam-00d9f526b27d.json");
 //			String[] beanNames = ctx.getBeanDefinitionNames();
 //			Arrays.sort(beanNames);
@@ -26,8 +27,7 @@ public class MainApp {
 //				System.out.println(beanName);
 //			}
 
-		};
-	}
-
+        };
+    }
 
 }
