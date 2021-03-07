@@ -81,9 +81,7 @@ public class BigTableModel {
             List<Long> ramHeapMetrics = new ArrayList<>();
             List<Long> ramNonHeapMetrics = new ArrayList<>();
             for (Row row : listRows) {
-//                row.getKey().
                 long timestamp = 0l;
-                System.out.println("key: " + row.getKey().toStringUtf8());
                 for (RowCell cell : row.getCells()) {
                     String cfFamily = cell.getFamily();
                     String qualifier = cell.getQualifier().toStringUtf8();
