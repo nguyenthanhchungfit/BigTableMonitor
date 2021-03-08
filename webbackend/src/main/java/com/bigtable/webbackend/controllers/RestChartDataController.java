@@ -11,6 +11,8 @@ import com.bigtable.webbackend.entities.MonitorCpuInfo;
 import com.bigtable.webbackend.entities.MonitorDataResult;
 import com.bigtable.webbackend.entities.MonitorNetworkInfo;
 import com.bigtable.webbackend.entities.MonitorRamData;
+import com.bigtable.webbackend.entities.RegisterAppResult;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class RestChartDataController {
+
+    private static final List<String> _MONITOR_APP = new ArrayList<>();
 
     @GetMapping("/api/data")
     public MonitorDataResult getDataByAppName(@RequestParam(value = "appName") String appName,
@@ -46,8 +50,15 @@ public class RestChartDataController {
 //        return dataResult;
     }
 
-    @PostMapping("/api/register")
-    public String registerMonitor() {
-        return "";
+    @GetMapping("/api/register")
+    public RegisterAppResult registerMonitor(@RequestParam(value = "appName") String appName) {
+        if (StringUtils.isNotBlank(appName)) {
+            if (!_MONITOR_APP.contains(appName)) {
+                _MONITOR_APP.add(appName);
+            }
+            return new RegisterAppResult(0, "Register successfully!!!");
+        } else {
+            return new RegisterAppResult(ErrorDefinition.ERR_PARAMS_NOT_VALID, "Appname is empty");
+        }
     }
 }
