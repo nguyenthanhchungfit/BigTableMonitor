@@ -22,11 +22,11 @@ public class MonitorNetworkInfo {
         this.trafficMetrics = trafficMetrics;
     }
 
-    public List<Long> getCpuUsageMetrics() {
+    public List<Long> getTrafficMetrics() {
         return trafficMetrics;
     }
 
-    public void setCpuUsageMetrics(List<Long> trafficMetrics) {
+    public void setTrafficMetrics(List<Long> trafficMetrics) {
         this.trafficMetrics = trafficMetrics;
     }
 }

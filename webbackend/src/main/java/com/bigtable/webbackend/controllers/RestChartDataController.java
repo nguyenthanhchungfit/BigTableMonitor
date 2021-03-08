@@ -7,17 +7,12 @@ package com.bigtable.webbackend.controllers;
 
 import com.bigtable.webbackend.bigtable.BigTableModel;
 import com.bigtable.webbackend.common.ErrorDefinition;
-import com.bigtable.webbackend.entities.MonitorCpuInfo;
 import com.bigtable.webbackend.entities.MonitorDataResult;
-import com.bigtable.webbackend.entities.MonitorNetworkInfo;
-import com.bigtable.webbackend.entities.MonitorRamData;
 import com.bigtable.webbackend.entities.RegisterAppResult;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,21 +27,39 @@ public class RestChartDataController {
 
     @GetMapping("/api/data")
     public MonitorDataResult getDataByAppName(@RequestParam(value = "appName") String appName,
-        @RequestParam(value = "from") long fromTime,
-        @RequestParam(value = "to") long toTime) {
+            @RequestParam(value = "from") long fromTime,
+            @RequestParam(value = "to") long toTime) {
 
         if (!(StringUtils.isNotBlank(appName) && fromTime > 0 && toTime > fromTime)) {
             return new MonitorDataResult(ErrorDefinition.ERR_PARAMS_NOT_VALID);
         } else {
             return BigTableModel.INSTANCE.queryData(appName, fromTime, toTime);
         }
-
+//        //random 1000 points data
 //        int errorCode = 0;
-//        MonitorCpuInfo cpuInfo = new MonitorCpuInfo(Arrays.asList(0.5, 0.2, 0.4));
-//        MonitorNetworkInfo networkInfo = new MonitorNetworkInfo(Arrays.asList(10000l, 10002l, 11000l));
-//        MonitorRamData ramInfo = new MonitorRamData(Arrays.asList(10l, 10l, 10l), Arrays.asList(5l, 6l, 7l));
-//        List<Long> timestamps = Arrays.asList(1615124074642l, 1615124079642l, 1615124084642l);
-//        MonitorDataResult dataResult = new MonitorDataResult(errorCode, cpuInfo, networkInfo, ramInfo, timestamps);
+//        Random r = new Random();
+//        int rangeMin = 0;
+//        int rangeMax = 100;
+//        List<Double> listCpuMetrics = new ArrayList<>();
+//        List<Long> listNetWork = new ArrayList<>();
+//        List<Long> listHeap = new ArrayList<>();
+//        List<Long> listNonHeap = new ArrayList<>();
+//        List<Long> listTimeStamps = new ArrayList<>();
+//        for (int i = 1; i < 1000; i += 10) {
+//            double randomValue = rangeMin + (rangeMax - rangeMin) * r.nextDouble(); // cpu ~ [0;100]
+//            long netWorkValue = (long) (randomValue * 1E6); // netWork ~ [0;1E6]
+//            long heap = (long) (randomValue * 1E3); // ram ~ [0;1E3]
+//            long nonHeap = (long) (1E3 - heap);
+//            listCpuMetrics.add(randomValue);
+//            listNetWork.add(netWorkValue);
+//            listHeap.add(heap);
+//            listNonHeap.add(nonHeap);
+//            listTimeStamps.add(System.currentTimeMillis() + i * 10000);
+//        }
+//        MonitorCpuInfo cpuInfo = new MonitorCpuInfo(listCpuMetrics);
+//        MonitorNetworkInfo networkInfo = new MonitorNetworkInfo(listNetWork);
+//        MonitorRamData ramInfo = new MonitorRamData(listHeap, listNonHeap);
+//        MonitorDataResult dataResult = new MonitorDataResult(errorCode, cpuInfo, networkInfo, ramInfo, listTimeStamps);
 //        return dataResult;
     }
 

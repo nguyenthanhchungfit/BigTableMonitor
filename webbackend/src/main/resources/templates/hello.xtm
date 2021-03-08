@@ -1,9 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
 
-<html>
-    <head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | Dashboard</title>
 
-    </head>
-    <body>
-        <h1>Hello world!!!</h1>
-    </body>
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="index3.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="#" class="nav-link">Contact</a>
+        </li>
+      </ul>
+
+      <!-- SEARCH FORM -->
+      <form class="form-inline ml-3">
+        <div class="input-group input-group-sm">
+          <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-navbar" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+        <!-- Messages Dropdown Menu -->
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-comments"></i>
+            <span class="badge badge-danger navbar-badge">3</span>
+          </a>
+        </li>
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-bell"></i>
+            <span class="badge badge-warning navbar-badge">15</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <span class="dropdown-item dropdown-header">15 Notifications</span>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-envelope mr-2"></i> 4 new messages
+              <span class="float-right text-muted text-sm">3 mins</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-users mr-2"></i> 8 friend requests
+              <span class="float-right text-muted text-sm">12 hours</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-file mr-2"></i> 3 new reports
+              <span class="float-right text-muted text-sm">2 days</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+            <i class="fas fa-expand-arrows-alt"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+            <i class="fas fa-th-large"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <a href="index3.html" class="brand-link">
+        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+          style="opacity: .8">
+        <span class="brand-text font-weight-light">BigTable Admin</span>
+      </a>
+      <div class="sidebar">
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+              <a href="pages/widgets.html" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Widgets
+                  <span class="right badge badge-danger">New</span>
+                </p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+    <div class="content-wrapper">
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Dashboard</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard v1</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="content">
+        <div class="container-fluid">
+          <!-- Small boxes (Stat box) -->
+          <form id="form-data">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>App Name</label>
+                  <select class="form-control" id="option-appname">
+                    <option>App1</option>
+                    <option>App2</option>
+                    <option>App3</option>
+                    <option>App4</option>
+                    <option>App5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Date and time range:</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="far fa-clock"></i></span>
+                    </div>
+                    <input type="text" class="form-control float-right" id="reservationtime">
+                  </div>
+                  <!-- /.input group -->
+                </div>
+              </div>
+              <div class="col-md-1">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" style="margin-top: 30px;" onclick="reloadChart()">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </form>
+          <div class="row">
+            <section class="col-lg-6">
+              <figure class="highcharts-figure">
+                <div id="chart-cpu"></div>
+              </figure>
+            </section>
+            <section class="col-lg-6">
+              <figure class="highcharts-figure">
+                <div id="chart-ram"></div>
+              </figure>
+            </section>
+            <section class="col-lg-6">
+              <figure class="highcharts-figure">
+                <div id="chart-network"></div>
+              </figure>
+            </section>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="plugins/moment/moment.min.js"></script>
+  <script src="plugins/daterangepicker/daterangepicker.js"></script>
+  <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <script src="dist/js/adminlte.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/series-label.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+  <script>
+    $(function () {
+      $('#reservationtime').daterangepicker({
+        timePicker: true,
+        startDate: moment().startOf('day'),
+        endDate: moment(),
+        timePickerIncrement: 30,
+        locale: {
+          format: 'MM/DD/YYYY HH:mm'
+        }
+      })
+      initChart();
+    })
+    function initChart() {
+      let appName = $('#option-appname').val();
+      let from = $('#reservationtime').data('daterangepicker').startDate.valueOf();
+      let to = $('#reservationtime').data('daterangepicker').endDate.valueOf();
+      let url = `/api/data?appName=${appName}&from=${from}&to=${to}`;
+      $.ajax({
+        type: "GET",
+        url: url,
+        success: function (data) {
+          drawAllChart(data);
+        }
+      });
+
+    }
+
+    function reloadChart() {
+      $('#form-data').submit(function (e) {
+        e.preventDefault();
+        let appName = $('#option-appname').val();
+        let from = $('#reservationtime').data('daterangepicker').startDate.valueOf();
+        let to = $('#reservationtime').data('daterangepicker').endDate.valueOf();
+        let url = `/api/data?appName=${appName}&from=${from}&to=${to}`;
+        $.ajax({
+          type: "GET",
+          url: url,
+          success: function (data) {
+            drawAllChart(data);
+          }
+        });
+      });
+    };
+
+    function drawAllChart(data) {
+      let start = $('#reservationtime').data('daterangepicker').startDate.valueOf();
+      let end = $('#reservationtime').data('daterangepicker').endDate.valueOf();
+
+      let cpuInfo = data.cpuInfo;
+      let ramInfo = data.ramInfo;
+      let networkInfo = data.networkInfo;
+      Highcharts.setOptions({
+        time: {
+          timezoneOffset: -7 * 60
+        }
+      });
+      if (cpuInfo) {
+        Highcharts.chart('chart-cpu', {
+          chart: {
+            type: 'spline'
+          },
+          title: {
+            text: 'CPU Info'
+          },
+          yAxis: {
+            title: {
+              text: 'Percent (%)'
+            }
+          },
+          xAxis: {
+            type: 'datetime',
+            labels: {
+              format: '{value: %m-%d}',
+              align: 'center'
+            }
+          },
+          plotOptions: {
+            series: {
+              label: {
+                connectorAllowed: false
+              },
+              pointStart: 2010
+            }
+          },
+          series: [{
+            name: "cpuUsageMetrics",
+            data: cpuInfo.cpuUsageMetrics,
+            pointStart: start,
+            pointInterval: (end - start) / cpuInfo.cpuUsageMetrics.length,
+          }],
+          responsive: {
+            rules: [{
+              condition: {
+                maxWidth: 500
+              },
+              chartOptions: {
+                legend: {
+                  layout: 'horizontal',
+                  align: 'center',
+                  verticalAlign: 'bottom'
+                }
+              }
+            }]
+          }
+        });
+      }
+      if (ramInfo) {
+        Highcharts.chart('chart-ram', {
+          chart: {
+            type: 'spline'
+          },
+          title: {
+            text: 'RAM Info'
+          },
+          yAxis: {
+            title: {
+              text: 'Percent (%)'
+            }
+          },
+          xAxis: {
+            type: 'datetime',
+            labels: {
+              format: '{value: %m-%d}',
+              align: 'center'
+            }
+          },
+          plotOptions: {
+            series: {
+              label: {
+                connectorAllowed: false
+              },
+              pointStart: 2010
+            }
+          },
+          series: [{
+            name: "heapUsageMetrics",
+            data: ramInfo.heapUsageMetrics,
+            pointStart: start,
+            pointInterval: (end - start) / ramInfo.heapUsageMetrics.length,
+          },
+          {
+            name: "nonHeapUsageMetrics",
+            data: ramInfo.nonHeapUsageMetrics,
+            pointStart: start,
+            pointInterval: (end - start) / ramInfo.nonHeapUsageMetrics.length,
+          }],
+          responsive: {
+            rules: [{
+              condition: {
+                maxWidth: 500
+              },
+              chartOptions: {
+                legend: {
+                  layout: 'horizontal',
+                  align: 'center',
+                  verticalAlign: 'bottom'
+                }
+              }
+            }]
+          }
+        });
+      }
+      if (networkInfo) {
+        Highcharts.chart('chart-network', {
+          chart: {
+            type: 'spline'
+          },
+          title: {
+            text: 'NETWORK Info'
+          },
+          yAxis: {
+            title: {
+              text: 'Bandwidth'
+            }
+          },
+          xAxis: {
+            type: 'datetime',
+            labels: {
+              format: '{value: %m-%d}',
+              align: 'center'
+            }
+          },
+          plotOptions: {
+            series: {
+              label: {
+                connectorAllowed: false
+              },
+              pointStart: 2010
+            }
+          },
+          series: [{
+            name: "trafficMetrics",
+            data: networkInfo.trafficMetrics,
+            pointStart: start,
+            pointInterval: (end - start) / networkInfo.trafficMetrics.length,
+          }],
+          responsive: {
+            rules: [{
+              condition: {
+                maxWidth: 500
+              },
+              chartOptions: {
+                legend: {
+                  layout: 'horizontal',
+                  align: 'center',
+                  verticalAlign: 'bottom'
+                }
+              }
+            }]
+          }
+        });
+      }
+    }
+  </script>
+</body>
+
 </html>
