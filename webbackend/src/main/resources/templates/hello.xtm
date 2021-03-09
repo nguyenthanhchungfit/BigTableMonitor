@@ -170,7 +170,7 @@
               </div>
               <div class="col-md-1">
                 <span class="input-group-btn">
-                  <button class="btn btn-default" style="margin-top: 30px;" onclick="reloadChart()">
+                  <button class="btn btn-default" style="margin-top: 30px;" type="submit">
                     <i class="fa fa-search"></i>
                   </button>
                 </span>
@@ -237,22 +237,20 @@
 
     }
 
-    function reloadChart() {
-      $('#form-data').submit(function (e) {
-        e.preventDefault();
-        let appName = $('#option-appname').val();
-        let from = $('#reservationtime').data('daterangepicker').startDate.valueOf();
-        let to = $('#reservationtime').data('daterangepicker').endDate.valueOf();
-        let url = `/api/data?appName=${appName}&from=${from}&to=${to}`;
-        $.ajax({
-          type: "GET",
-          url: url,
-          success: function (data) {
-            drawAllChart(data);
-          }
-        });
+    $('#form-data').submit(function (e) {
+      e.preventDefault();
+      let appName = $('#option-appname').val();
+      let from = $('#reservationtime').data('daterangepicker').startDate.valueOf();
+      let to = $('#reservationtime').data('daterangepicker').endDate.valueOf();
+      let url = `/api/data?appName=${appName}&from=${from}&to=${to}`;
+      $.ajax({
+        type: "GET",
+        url: url,
+        success: function (data) {
+          drawAllChart(data);
+        }
       });
-    };
+    });
 
     function drawAllChart(data) {
       let start = $('#reservationtime').data('daterangepicker').startDate.valueOf();
@@ -282,7 +280,7 @@
           xAxis: {
             type: 'datetime',
             labels: {
-              format: '{value: %m-%d}',
+              format: '{value: %H:%M}',
               align: 'center'
             }
           },
@@ -326,13 +324,13 @@
           },
           yAxis: {
             title: {
-              text: 'Percent (%)'
+              text: 'Byte'
             }
           },
           xAxis: {
             type: 'datetime',
             labels: {
-              format: '{value: %m-%d}',
+              format: '{value: %H:%M}',
               align: 'center'
             }
           },
@@ -382,13 +380,13 @@
           },
           yAxis: {
             title: {
-              text: 'Bandwidth'
+              text: 'Byte'
             }
           },
           xAxis: {
             type: 'datetime',
             labels: {
-              format: '{value: %m-%d}',
+              format: '{value: %H:%M}',
               align: 'center'
             }
           },
