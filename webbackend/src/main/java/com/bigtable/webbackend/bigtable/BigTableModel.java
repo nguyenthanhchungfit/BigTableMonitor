@@ -70,6 +70,11 @@ public class BigTableModel {
         this._dataClient.writeDataToTable(rowMutation);
     }
 
+    public void delelteRow(String rowKey) {
+        RowMutation rowMutation = RowMutation.create(BTConfig.MONITOR_TABLE_ID, rowKey).deleteRow();
+        this._dataClient.writeDataToTable(rowMutation);
+    }
+
     public MonitorDataResult queryData(String appName, long fromTime, long toTime) {
         String fromKey = formatKey(appName, fromTime);
         String toKey = formatKey(appName, toTime);
