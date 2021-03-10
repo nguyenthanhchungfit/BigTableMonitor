@@ -21,7 +21,10 @@ import com.google.cloud.bigtable.data.v2.models.RowCell;
 import com.google.cloud.bigtable.data.v2.models.RowMutation;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -80,22 +83,28 @@ public class BigTableModel {
             List<Long> networkMetrics = new ArrayList<>();
             List<Long> ramHeapMetrics = new ArrayList<>();
             List<Long> ramNonHeapMetrics = new ArrayList<>();
+            Map<Long, Map<String, String>> mapData = new HashMap<>();
             for (Row row : listRows) {
                 long timestamp = 0l;
+                Map<String, String> mapValues = new HashMap<>();
                 for (RowCell cell : row.getCells()) {
                     String cfFamily = cell.getFamily();
                     String qualifier = cell.getQualifier().toStringUtf8();
                     String value = cell.getValue().toStringUtf8();
                     timestamp = cell.getTimestamp();
                     if (BTConfig.CF_CPU.equals(cfFamily) && BTConfig.CF_QUALIFIER_CPU_USAGE.equals(qualifier)) {
-                        cpuMetrics.add(Double.valueOf(value));
+//                        cpuMetrics.add(Double.valueOf(value));
+                        mapValues.put("cpu", value);
                     } else if (BTConfig.CF_NETWORK.equals(cfFamily) && BTConfig.CF_QUALIFIER_NETWORK_TRAFFIC.equals(qualifier)) {
-                        networkMetrics.add(Long.valueOf(value));
+                        mapValues.put("netwowrk", value);
+//                        networkMetrics.add(Long.valueOf(value));
                     } else if (BTConfig.CF_RAM.equals(cfFamily)) {
                         if (BTConfig.CF_QUALIFIER_RAM_HEAP_USAGE.equals(qualifier)) {
-                            ramHeapMetrics.add(Long.valueOf(value));
+                            mapValues.put("ram-heap", value);
+//                            ramHeapMetrics.add(Long.valueOf(value));
                         } else if (BTConfig.CF_QUALIFIER_RAM_NONHEAP_USAGE.equals(qualifier)) {
-                            ramNonHeapMetrics.add(Long.valueOf(value));
+                            mapValues.put("ram-nonheap", value);
+//                            ramNonHeapMetrics.add(Long.valueOf(value));
                         }
                     }
 //                    System.out.println("cell:  " + cell.getFamily() + ",  qualifier: "
@@ -104,7 +113,20 @@ public class BigTableModel {
                 if (timestamp > 0) {
                     timestamp /= 1000;
                 }
+                mapData.put(timestamp, mapValues);
+//                listTimestamp.add(timestamp);
+            }
+
+            List<Long> listTimestampOrder = new ArrayList<>(mapData.keySet());
+//            Collections.reverse(listTimestampOrder);
+            Collections.sort(listTimestampOrder);
+            for (long timestamp : listTimestampOrder) {
                 listTimestamp.add(timestamp);
+                Map<String, String> mapValues = mapData.get(timestamp);
+                cpuMetrics.add(Double.valueOf(mapValues.get("cpu")));
+                networkMetrics.add(Long.valueOf(mapValues.get("netwowrk")));
+                ramHeapMetrics.add(Long.valueOf(mapValues.get("ram-heap")));
+                ramNonHeapMetrics.add(Long.valueOf(mapValues.get("ram-nonheap")));
             }
 
             return new MonitorDataResult(0, new MonitorCpuInfo(cpuMetrics), new MonitorNetworkInfo(networkMetrics),
@@ -119,9 +141,10 @@ public class BigTableModel {
     }
 
     public static void main(String[] args) {
-        String appName = "app-collector-1";
-        INSTANCE.initTable();
-        INSTANCE.queryData(appName, 1615131700639l, 1615131753722l);
+        INSTANCE._adminClient.deleteTable(BTConfig.MONITOR_TABLE_ID);
+//        String appName = "app-collector-1";
+//        INSTANCE.initTable();
+//        INSTANCE.queryData(appName, 1615131700639l, 1615131753722l);
 //        String rowKey = "app-collector-1/1615131380173";
 //        Row row = INSTANCE._dataClient.readSingleRow(BTConfig.MONITOR_TABLE_ID, rowKey);
 //        for (RowCell cell : row.getCells()) {

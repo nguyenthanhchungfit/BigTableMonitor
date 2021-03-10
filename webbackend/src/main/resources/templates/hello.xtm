@@ -148,11 +148,10 @@
                 <div class="form-group">
                   <label>App Name</label>
                   <select class="form-control" id="option-appname">
-                    <option>App1</option>
-                    <option>App2</option>
-                    <option>App3</option>
-                    <option>App4</option>
-                    <option>App5</option>
+                    <option>Application-01</option>
+                    <option>Application-02</option>
+                    <option>Application-03</option>
+                    <option>Application-04</option>
                   </select>
                 </div>
               </div>

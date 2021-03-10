@@ -27,8 +27,8 @@ public class RestChartDataController {
 
     @GetMapping("/api/data")
     public MonitorDataResult getDataByAppName(@RequestParam(value = "appName") String appName,
-            @RequestParam(value = "from") long fromTime,
-            @RequestParam(value = "to") long toTime) {
+        @RequestParam(value = "from") long fromTime,
+        @RequestParam(value = "to") long toTime) {
 
         if (!(StringUtils.isNotBlank(appName) && fromTime > 0 && toTime > fromTime)) {
             return new MonitorDataResult(ErrorDefinition.ERR_PARAMS_NOT_VALID);
